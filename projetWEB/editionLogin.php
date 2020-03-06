@@ -5,7 +5,7 @@ $pdo = get_pdo();
 
 if(isset($_GET['login'])){
   $utilisateurInfo = $_GET['login'];
-  $reqUtilisateur = $pdo->prepare('SELECT * FROM projetWEB.UTILISATEUR WHERE UTILISATEUR.login = ?');
+  $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($utilisateurInfo)); 
   $utilisateur = $reqUtilisateur->fetch();
   if(isset($_POST['nouveauLogin']) and !empty($_POST['nouveauLogin']) and ($_POST['nouveauLogin'] != $utilisateur['login'])){
@@ -13,13 +13,16 @@ if(isset($_GET['login'])){
     if(strlen($login) <= 3 or strlen($login) > 255) {
       $error ="Votre login doit avoir entre 3 et 255 caractères inclus !";
     } else {
-    $insererLogin = $pdo->prepare("UPDATE projetWEB.UTILISATEUR SET UTILISATEUR.login = ? WHERE UTILISATEUR.idUtilisateur = ?");
-    $insererLogin->execute(array($login,$utilisateur['idUtilisateur']));
-    $_COOKIE['login'] = $login;
-    header('Location: profil.php?login='.$_COOKIE['login']);
+      $reqUtilisateur->execute(array($login));
+      $loginExist = $reqUtilisateur-> rowCount();
+      if($loginExist == 0){
+        $insererLogin = $pdo->prepare("UPDATE id12822867_projetweb.UTILISATEUR SET UTILISATEUR.login = ? WHERE UTILISATEUR.idUtilisateur = ?");
+        $insererLogin->execute(array($login,$utilisateur['idUtilisateur']));
+        header('Location: /profil/login/'.$login);
+        exit();
+      }else{$error = "Ce login est déjà utilisé !";}
     }
   }
-
 ?>
 
 
@@ -32,7 +35,7 @@ if(isset($_GET['login'])){
  <link rel="stylesheet" href="/css/calendar.css">
   </head>
   <body class="col">
-  <?php echo '<a href="profil.php?login='.$_GET['login'].'">◀️ Retourner au profil</a>';?><br/>
+  <?php echo '<a href="/profil/login/'.$_GET['login'].'">◀️ Retourner au profil</a>';?><br/>
     <div class="container">
       <table class="table">
       <tr class="tr titre"> 
@@ -47,7 +50,7 @@ if(isset($_GET['login'])){
       <label>Login : </label>
       </td>
       <td>
-      <input type="text" name="nouveauLogin" placeholder="Nouveau Login" value="<?php echo $_GET['login'];?>" /> <br/> <br/>
+      <input type="text" name="nouveauLogin" placeholder="Nouveau Login" value="<?php echo $_COOKIE['login'];?>" /> <br/> <br/>
       </td>
       <td>
       <input type="submit" value= "Enregistrer Modification" /> <br/> <br/>
@@ -58,7 +61,7 @@ if(isset($_GET['login'])){
       </table>
       </div>
       <?php
-      echo '<small>';
+      echo '<small class="center">';
       if(isset($error)){
         echo $error;
       }
@@ -68,7 +71,5 @@ if(isset($_GET['login'])){
 </html>
 
 <?php 
-}else{
-  header('Location : connexion.php');
 }
 ?>

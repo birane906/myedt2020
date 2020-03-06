@@ -10,7 +10,7 @@
  <body> 
  
 <nav class="navbar navbar-dark bg-primary mb-3">
-  <a href="/accueil.php?login=<?= $_GET['login'];?>" class="navbar-brand"> 🏠</a>
-  <a href="/planning.php?login=<?= $_GET['login'];?>" class="navbar-brand"> 🔄 </a>
+  <a href="/accueil/login/<?= $_GET['login'];?>" class="navbar-brand"> 🏠</a>
+  <a href="/planning/login/<?= $_GET['login'];?>" class="navbar-brand"> 🔄 </a>
   <a href="/deconnexion.php?>" class="navbar-brand"> 📴</a>
 </nav>

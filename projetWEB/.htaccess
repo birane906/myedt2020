@@ -1,4 +1,4 @@
-#Turn rewrite engine on
+c#Turn rewrite engine on
 Options +FollowSymlinks
 RewriteEngine on
 

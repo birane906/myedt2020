@@ -6,7 +6,7 @@ $pdo = get_pdo();
 if(isset($_GET['login'])){
 
   $getLoginUtilisateur = $_GET['login'];
-  $reqUtilisateur = $pdo->prepare('SELECT * FROM projetWEB.UTILISATEUR WHERE UTILISATEUR.login = ?');
+  $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($getLoginUtilisateur));
   $utilisateurInfo = $reqUtilisateur->fetch();
 ?>
@@ -24,14 +24,10 @@ if(isset($_GET['login'])){
  </head>
  
  <body class="col"> 
- <?php echo '<a href="accueil.php?login='.$utilisateurInfo['login'].'">🏠</a>';?>
- <?php echo '<a href="deconnexion.php">📴</a>';?><br/>
+ <?php echo '<a href="/accueil/login/'.$_GET['login'].'">🏠</a>';?>
+ <?php echo '<a href="/deconnexion.php">📴</a>';?><br/>
 
     <div class="container">
-
-      
-
-
 <table class="table">
       <tr class="tr titre"> 
       <h1 class="center">Profil de <?php echo $utilisateurInfo['login']; ?> </h1>
@@ -67,8 +63,8 @@ if(isset($_GET['login'])){
       if ( isset($utilisateurInfo['login'])){
         ?>
       
-      <?php echo '<a href="editionLogin.php?login='.$utilisateurInfo['login'].'" class="btn btn-warning">Changer mon login</a>'; ?>
-      <?php echo '<a href="editionMdp.php?login='.$utilisateurInfo['login'].'" class="btn btn-warning">Changer mon mot de passe</a>' ; ?>
+      <?php echo '<a href="/editionLogin/login/'.$utilisateurInfo['login'].'" class="btn btn-warning">Changer mon login</a>'; ?>
+      <?php echo '<a href="/editionMdp/login/'.$utilisateurInfo['login'].'" class="btn btn-warning">Changer mon mot de passe</a>' ; ?>
   
       
       <?php 

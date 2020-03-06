@@ -8,13 +8,11 @@ $idPro ="";
  if(isset($_GET['id'])){
   $idPro = $_GET['id'];
    $pdo =get_pdo();
-   $sql = "SELECT * FROM projetWEB.PRO WHERE idPro = $idPro ";
+   $sql = "SELECT * FROM id12822867_projetweb.PRO WHERE PRO.idPro = $idPro ";
    $result = $pdo->query($sql);
    $data = $result->fetchAll();
    $libPro = $data[0]['libPro'];
     $idPro = $data[0]['idPro'];
-    
-
   }
 
  
@@ -22,14 +20,14 @@ $idPro ="";
  if(isset($_POST['libPro'])){
   $libPro = $_POST['libPro'] ;
   $pdo =get_pdo();
-  $sql = "SELECT * FROM projetWEB.PRO WHERE idPro = $idPro ";
+  $sql = "SELECT * FROM id12822867_projetweb.PRO WHERE idPro = $idPro ";
    $result = $pdo->query($sql);
    $data = $result->fetchAll();
    $idPro = $data[0]['idPro'];
-   $sql2 ="UPDATE projetWEB.PRO SET libPro='$libPro' WHERE idPro = $idPro ";
+   $sql2 ="UPDATE id12822867_projetweb.PRO SET libPro='$libPro' WHERE idPro = $idPro ";
    $pdo->exec($sql2);
    $login = $_GET['login'];
-    header("Location: pro.php?login=$login");
+    header("Location: /pro/login/$login");
  }
 
  
@@ -45,7 +43,7 @@ $idPro ="";
  <title>Modifier Document - MyEDT</title>
 </head>
 <body class="col">
-<?php echo '<a href="pro.php?login='.$_GET['login'].'">◀️ Retourner aux CV/lettre</a>';?><br/>
+<?php echo '<a href="/pro/login/'.$_GET['login'].'">◀️ Retourner aux CV/lettre</a>';?><br/>
 <div class="container"> 
    <table class="table">
    <tr class="tr titre">

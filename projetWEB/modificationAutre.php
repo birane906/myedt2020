@@ -8,13 +8,11 @@ $idAutre ="";
  if(isset($_GET['id'])){
   $idAutre = $_GET['id'];
    $pdo =get_pdo();
-   $sql = "SELECT * FROM projetWEB.AUTRE WHERE idAutre = $idAutre ";
+   $sql = "SELECT * FROM id12822867_projetweb.AUTRE WHERE idAutre = $idAutre ";
    $result = $pdo->query($sql);
    $data = $result->fetchAll();
    $libAutre = $data[0]['libAutre'];
     $idAutre = $data[0]['idAutre'];
-    
-
   }
 
  
@@ -22,14 +20,14 @@ $idAutre ="";
  if(isset($_POST['libAutre'])){
   $libAutre = $_POST['libAutre'] ;
   $pdo =get_pdo();
-  $sql = "SELECT * FROM projetWEB.AUTRE WHERE idAutre = $idAutre ";
+  $sql = "SELECT * FROM id12822867_projetweb.AUTRE WHERE idAutre = $idAutre ";
    $result = $pdo->query($sql);
    $data = $result->fetchAll();
    $idAutre = $data[0]['idAutre'];
-   $sql2 ="UPDATE projetWEB.AUTRE SET libAutre='$libAutre' WHERE idAutre = $idAutre ";
+   $sql2 ="UPDATE id12822867_projetweb.AUTRE SET libAutre='$libAutre' WHERE idAutre = $idAutre ";
    $pdo->exec($sql2);
    $login = $_GET['login'];
-    header("Location: autre.php?login=$login");
+    header("Location: /autre/login/$login");
  }
 
  
@@ -45,7 +43,7 @@ $idAutre ="";
   <title>Modifier Document - MyEDT</title>
 </head>
 <body class="col">
-<?php echo '<a href="autre.php?login='.$_GET['login'].'">◀️ Retourner aux autres documents</a>';?><br/>
+<?php echo '<a href="/autre/login/'.$_GET['login'].'">◀️ Retourner aux autres documents</a>';?><br/>
  <div class="container"> 
    <table class="table">
    <tr class="tr titre">

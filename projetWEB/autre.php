@@ -3,8 +3,11 @@
   require 'src/Calendar/Month.php';
   require 'src/Calendar/Events.php';
   $pdo = get_pdo();
-    $getLoginUtilisateur = $_GET['login'];
-    $reqUtilisateur = $pdo->prepare('SELECT * FROM projetWEB.UTILISATEUR WHERE UTILISATEUR.login = ?');
+
+  if(isset($_COOKIE['login'])){
+
+    $getLoginUtilisateur = $_COOKIE['login'];
+    $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
     $reqUtilisateur->execute(array($getLoginUtilisateur));
     $utilisateurInfo = $reqUtilisateur->fetch();
   if(!empty($_FILES)){
@@ -15,7 +18,7 @@
     $extensionsAutorisees =array('.pdf', '.PDF');
     if(in_array($AutreExtension,$extensionsAutorisees)){
       if(move_uploaded_file($libAutreTmp,$AutreDest)){
-        $reqAutre = $pdo->prepare("INSERT INTO projetWEB.AUTRE(AUTRE.libAutre,AUTRE.urlAutre,AUTRE.idUtilisateur) VALUES (?,?,?) ");
+        $reqAutre = $pdo->prepare("INSERT INTO id12822867_projetweb.AUTRE(AUTRE.libAutre,AUTRE.urlAutre,AUTRE.idUtilisateur) VALUES (?,?,?) ");
         $reqAutre->execute(array($libAutre,$AutreDest,$utilisateurInfo['idUtilisateur']));
         echo "Fichier envoyé avec succès";
       }else{
@@ -38,7 +41,7 @@
 </head>
 <body class="col">
   
-<?php echo '<a href="accueil.php?login='.$utilisateurInfo['login'].'" >🏠</a>';?><br/>
+<?php echo '<a href="/accueil/login/'.$utilisateurInfo['login'].'" >🏠</a>';?><br/>
 <div class="container">
 <h1 class="center">Ajouter un fichier</h1>
 <small class="text-muted">Seuls les fichiers au format pdf sont autorisés (soient les extensions ".pdf" et ".PDF"! Il sera créé dans votre répertoire courant un dossier /cours/ où sera stocké tous les que vous téléchargerez.</small>
@@ -52,11 +55,10 @@
 <div class="container">
   <h1 class="center">Autres Documents enregistrés</h1>
   <?php 
-  $getLoginUtilisateur = $_GET['login'];
-  $reqUtilisateur = $pdo->prepare('SELECT * FROM projetWEB.UTILISATEUR WHERE UTILISATEUR.login = ?');
+  $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($getLoginUtilisateur));
   $utilisateurInfo = $reqUtilisateur->fetch();
-    $req = $pdo->query('SELECT * FROM projetWEB.AUTRE WHERE idUtilisateur='.$utilisateurInfo["idUtilisateur"].'');
+    $req = $pdo->query('SELECT * FROM id12822867_projetweb.AUTRE WHERE idUtilisateur='.$utilisateurInfo["idUtilisateur"].'');
     
     echo '<table class="table">';
     echo '<tr class="tr titre">' ;
@@ -79,13 +81,13 @@
       echo $data['libAutre'];
       echo '</td>';
       echo '<td>';
-      echo '<a href="'.$data['urlAutre'].'">'.$data['libAutre'].' </a> ';
+      echo '<a href="/'.$data['urlAutre'].'">'.$data['libAutre'].' </a> ';
       echo '</td>';
       echo '<td>';
-      echo '<a href ="modificationAutre.php?id='.$data['idAutre'].'&login='.$utilisateurInfo['login'].'" class="btn btn-warning"> Modifier </a>';
+      echo '<a href ="/modificationAutre/id/'.$data['idAutre'].'/login/'.$utilisateurInfo['login'].'" class="btn btn-warning"> Modifier </a>';
       echo '</td>';
       echo '<td>';
-      echo '<a href="suppressionAutre.php?id='.$data['idAutre'].'&login='.$utilisateurInfo['login'].'" onclick="return confirm(\'Etes vous sûr(e) de vouloir supprimer ce cours ?\');" class="btn btn-danger"> Supprimer </a>';
+      echo '<a href="/suppressionAutre/id/'.$data['idAutre'].'/login/'.$utilisateurInfo['login'].'" onclick="return confirm(\'Etes vous sûr(e) de vouloir supprimer ce cours ?\');" class="btn btn-danger"> Supprimer </a>';
       echo '</td>';
       echo '<tr/>';
       
@@ -95,3 +97,5 @@
   </div>
 </body>
 </html>
+
+  <?php } ?>

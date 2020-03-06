@@ -13,10 +13,9 @@ class Events {
 
 
   public function getEventsBetween(\DateTime $start, \DateTime $end,int $id): array{
-    $pdo = new \PDO('mysql:host=localhost;dbname =projetWEB', 'root', 'P@pisco1', [
-       \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
-    ]);
-    $sql = "SELECT * FROM projetWEB.EVENEMENT WHERE idUtilisateur = $id AND debutEvenement BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND '{$end->format('Y-m-d 23:59:59')}' ORDER BY debutEvenement ASC ";
+    $pdo = new \PDO('mysql:host=localhost;dbname =id12822867_id12822867_projetweb', 'id12822867_root', 'P@pisco1'
+  );
+    $sql = "SELECT * FROM id12822867_projetweb.EVENEMENT WHERE idUtilisateur = $id AND debutEvenement BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND '{$end->format('Y-m-d 23:59:59')}' ORDER BY debutEvenement ASC ";
     $statement = $this->pdo->query($sql);
     $results = $statement->fetchAll();
     return $results;
@@ -42,7 +41,7 @@ class Events {
 
 
   public function find(int $id): array {
-      $result = $this->pdo->query("SELECT * FROM projetWEB.EVENEMENT WHERE id = $id LIMIT 1")->fetch();
+      $result = $this->pdo->query("SELECT * FROM id12822867_projetweb.EVENEMENT WHERE id = $id LIMIT 1")->fetch();
       if ($result === false){
         throw new \Exception('Aucun résultat trouvé');
       } 
@@ -51,7 +50,7 @@ class Events {
   }
 
   public function create(array $event):bool{
-     $statement =$this->pdo->prepare('INSERT INTO projetWEB.EVENEMENT(libEvenement,lieuEvenement, debutEvenement,finEvenement, idUtilisateur) VALUES (?,?,?,?,?)');
+     $statement =$this->pdo->prepare('INSERT INTO id12822867_projetweb.EVENEMENT(libEvenement,lieuEvenement, debutEvenement,finEvenement, idUtilisateur) VALUES (?,?,?,?,?)');
      $event['debutEvenement'] = new \DateTime($event['debutEvenement']);
      $event['finEvenement'] = new \DateTime($event['finEvenement']);
     return $statement->execute([
@@ -61,7 +60,7 @@ class Events {
 
 
   public function update(array $event):bool{
-    $statement =$this->pdo->prepare('UPDATE projetWEB.EVENEMENT SET EVENEMENT.libEvenement = ?, EVENEMENT.lieuEvenement = ?, EVENEMENT.debutEvenement = ?, EVENEMENT.finEvenement = ?, EVENEMENT.idUtilisateur = ? WHERE id = ?');
+    $statement =$this->pdo->prepare('UPDATE id12822867_projetweb.EVENEMENT SET EVENEMENT.libEvenement = ?, EVENEMENT.lieuEvenement = ?, EVENEMENT.debutEvenement = ?, EVENEMENT.finEvenement = ?, EVENEMENT.idUtilisateur = ? WHERE id = ?');
     $event['debutEvenement'] = new \DateTime($event['debutEvenement']);
     $event['finEvenement'] = new \DateTime($event['finEvenement']);
    return $statement->execute([

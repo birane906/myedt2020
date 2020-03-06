@@ -16,15 +16,15 @@ if(isset($_POST['formInscription'])){
    $mdplength = strlen($motDePasse);
     if ($loginlength <= 255 and $loginlength >= 3){
 
-      $reqLogin = $pdo->prepare("SELECT * FROM projetWEB.UTILISATEUR WHERE login = ?");
+      $reqLogin = $pdo->prepare("SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE login = ?");
       $reqLogin->execute(array($login));
       $loginExist = $reqLogin-> rowCount();
       if($loginExist == 0){
         if($motDePasse == $motDePasse2 and $mdplength >= 6){
             if(preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])#', $motDePasse)){
-              $insererUtilisateur = $pdo->prepare("INSERT INTO projetWEB.UTILISATEUR(login,  motDePasse, nomUtilisateur, prenomUtilisateur) VALUES (?,?,?,?)");
+              $insererUtilisateur = $pdo->prepare("INSERT INTO id12822867_projetweb.UTILISATEUR(login,  motDePasse, nomUtilisateur, prenomUtilisateur) VALUES (?,?,?,?)");
               $insererUtilisateur->execute(array($login,$motDePasse,$nomUtilisateur,$prenomUtilisateur));
-              $erreur=  "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
+              $erreur=  "Votre compte a bien été créé ! <a href=\"index.php\">Me connecter</a>";
               $a = 0;
             }else{
               $erreur = "Votre mot de passe est non conforme ! Il doit au moins contenir un chiffre et au moins une majuscule.";
@@ -76,7 +76,7 @@ if(isset($_POST['formInscription'])){
     <div class="card-body">
     <div style="text-align: right;">
     <a href="inscription.php"><input type="button" value="Inscription" class="bu"></a>
-    <a href="connexion.php"><input type="button" value="Connexion" class="bu"></a>
+    <a href="index.php"><input type="button" value="Connexion" class="bu"></a>
     </div>
     <br/><br/>
       <h2 class="title">Inscription sur myEDT</h2>

@@ -10,20 +10,15 @@ $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify
 $weeks = $month->getWeeks();
 $end = (clone $start)->modify('+' . (6 + 7 * ($weeks - 1) ). 'days');
 
+if(isset($_COOKIE['login']) and isset($_GET['login'])){
 
-$getLoginUtilisateur = $_GET['login'];
-  $reqUtilisateur = $pdo->prepare('SELECT * FROM projetWEB.UTILISATEUR WHERE UTILISATEUR.login = ?');
+  $getLoginUtilisateur = $_COOKIE['login'];
+  $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($getLoginUtilisateur));
   $utilisateurInfo = $reqUtilisateur->fetch();
 
 $events = $events->getEventsBetweenByDay($start, $end,$utilisateurInfo['idUtilisateur']);
 
-
-
-if(isset($_GET['login'])){
-
-  
-  if($utilisateurInfo['login'] == $getLoginUtilisateur){
   require 'views/header.php';
 
 ?>
@@ -54,8 +49,8 @@ if(isset($_GET['login'])){
 <?php }?>
 
   <div>
-    <a href="/planning.php?month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->year; ?>&login=<?= $getLoginUtilisateur; ?>" class="btn btn-primary">&lt;</a>
-    <a href="/planning.php?month=<?= $month->nextMonth()->month; ?>&year=<?= $month->nextMonth()->year; ?>&login=<?= $getLoginUtilisateur; ?>" class="btn btn-primary">&gt;</a>
+    <a href="/planning/month/<?= $month->previousMonth()->month; ?>/year/<?= $month->previousMonth()->year; ?>/login/<?= $getLoginUtilisateur; ?>" class="btn btn-primary">&lt;</a>
+    <a href="/planning/month/<?= $month->nextMonth()->month; ?>/year/<?= $month->nextMonth()->year; ?>/login=<?= $getLoginUtilisateur; ?>" class="btn btn-primary">&gt;</a>
   </div>
 
 </div>
@@ -90,11 +85,10 @@ if(isset($_GET['login'])){
  
 </table>
 
-<?php echo '<a href="/add.php?login='.$utilisateurInfo['login'].'" class="calendar__button">  + </a>' ;?>
+<?php echo '<a href="/add/login/'.$utilisateurInfo['login'].'" class="calendar__button">  + </a>' ;?>
 </div>
 
 <?php 
 require 'views/footer.php';
-}else {header('Location: /403.php');}
 }
 ?>

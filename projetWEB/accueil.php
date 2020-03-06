@@ -4,11 +4,10 @@ session_start();
 require 'src/bootstrap.php';
 require 'src/Calendar/Events.php';
 $pdo = get_pdo();
-//var_dump($_COOKIE['login']);
-if(isset($_COOKIE['login'])){
+if(isset($_COOKIE['login']) and isset($_GET['login'])){
 
-  $getLoginUtilisateur = $_COOKIE['login'];
-  $reqUtilisateur = $pdo->prepare('SELECT * FROM projetWEB.UTILISATEUR WHERE UTILISATEUR.login = ?');
+  $getLoginUtilisateur = $_GET['login'];
+  $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($getLoginUtilisateur));
   $utilisateurInfo = $reqUtilisateur->fetch();
 
@@ -28,27 +27,26 @@ if(isset($_COOKIE['login'])){
  <body> 
 
 <nav class="nav " >
-  <p class="text">Bienvenue dans myEDT <?php echo $getLoginUtilisateur; ?> </p>
+  <p class="text">Bienvenue dans myEDT <?php echo $_COOKIE['login']; ?> </p>
   <ol >
-    <?php echo '<li class="menu-item"><a href="accueil.php?login='.$getLoginUtilisateur.'">Accueil</a></li>'; ?>
-    
+    <?php echo '<li class="menu-item"><a href="/accueil/login/'.$getLoginUtilisateur.'">Accueil</a></li>'; ?>
     <li class="menu-item">
-      <?php echo '<a href="profil.php?login='.$getLoginUtilisateur.'">Profil</a>'; ?>
-      
+      <?php echo '<a href="/profil/login/'.$getLoginUtilisateur.'">Profil</a>'; ?>
     </li>
-    <?php echo '<li class="menu-item"><a href="planning.php?login='.$utilisateurInfo['login'].'">Planning</a></li>'; ?>
-    <?php echo '<li class="menu-item"><a href="cours.php?login='.$utilisateurInfo['login'].'">Cours</a></li>'; ?>
-    <?php echo '<li class="menu-item"><a href="pro.php?login='.$utilisateurInfo['login'].'">CV / Lettre</a></li>'; ?>
-    <?php echo '<li class="menu-item"><a href="autre.php?login='.$utilisateurInfo['login'].'">Autres</a></li>'; ?>
+    <?php echo '<li class="menu-item"><a href="/planning/login/'.$utilisateurInfo['login'].'">Planning</a></li>'; ?>
+    <?php echo '<li class="menu-item"><a href="/cours/login/'.$utilisateurInfo['login'].'">Cours</a></li>'; ?>
+    <?php echo '<li class="menu-item"><a href="/pro/login/'.$utilisateurInfo['login'].'">CV / Lettre</a></li>'; ?>
+    <?php echo '<li class="menu-item"><a href="/autre/login/'.$utilisateurInfo['login'].'">Autres</a></li>'; ?>
     <?php echo '<li class="menu-item"><a href="#">Contactez nous</a></li>'; ?>
     <li class="menu-item"><a href="#0">A propos</a></li>   
-    <?php echo '<li class="menu-item"><a href="deconnexion.php">Déconnexion</a></li>'; ?>
-  
-  </ol>
+    <?php echo '<li class="menu-item"><a href="/deconnexion.php">Déconnexion</a></li>'; ?>
+   </ol>
 </nav>
 
 
 <?php 
 require 'views/footer.php';
+}else{
+  header("Location : 403.php");
 }
 ?>

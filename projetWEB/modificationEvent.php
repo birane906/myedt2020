@@ -3,7 +3,6 @@ require 'src/bootstrap.php';
 require 'src/Calendar/Month.php';
 require 'src/Calendar/Events.php';
 require 'src/Calendar/EventValidator.php';
-require 'src/App/Validator.php';
 
 
 $pdo = get_pdo();
@@ -35,7 +34,7 @@ $data['lieuEvenement'] = $event['lieuEvenement'];
 
 
 $getLoginUtilisateur = $_GET['login'];
-$reqUtilisateur = $pdo->prepare('SELECT * FROM projetWEB.UTILISATEUR WHERE UTILISATEUR.login = ?');
+$reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
 $reqUtilisateur->execute(array($getLoginUtilisateur));
 $utilisateurInfo = $reqUtilisateur->fetch();
 

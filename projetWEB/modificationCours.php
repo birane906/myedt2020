@@ -7,7 +7,7 @@ $idCours ="";
  if(isset($_GET['id'])){
   $idCours = $_GET['id'];
    $pdo =get_pdo();
-   $sql = "SELECT * FROM projetWEB.COURS WHERE idCours = $idCours ";
+   $sql = "SELECT * FROM id12822867_projetweb.COURS WHERE idCours = $idCours ";
    $result = $pdo->query($sql);
    $data = $result->fetchAll();
    $libCours = $data[0]['libCours'];
@@ -21,14 +21,14 @@ $idCours ="";
  if(isset($_POST['libCours'])){
   $libCours = $_POST['libCours'] ;
   $pdo =get_pdo();
-  $sql = "SELECT * FROM projetWEB.COURS WHERE idCours = $idCours ";
+  $sql = "SELECT * FROM id12822867_projetweb.COURS WHERE idCours = $idCours ";
    $result = $pdo->query($sql);
    $data = $result->fetchAll();
    $idCours = $data[0]['idCours'];
-   $sql2 ="UPDATE projetWEB.COURS SET libCours='$libCours' WHERE idCours = $idCours ";
+   $sql2 ="UPDATE id12822867_projetweb.COURS SET libCours='$libCours' WHERE idCours = $idCours ";
    $pdo->exec($sql2);
    $login = $_GET['login'];
-    header("Location: cours.php?login=$login");
+    header("Location: /cours/login/$login");
  }
 
  
@@ -44,7 +44,7 @@ $idCours ="";
  <title>Modifier Document - MyEDT</title>
 </head>
 <body class="col">
-<?php echo '<a href="cours.php?login='.$_GET['login'].'">◀️ Retourner aux cours</a>';?><br/>
+<?php echo '<a href="/cours/login/'.$_GET['login'].'">◀️ Retourner aux cours</a>';?><br/>
 <div class="container"> 
    <table class="table">
    <tr class="tr titre"> 

@@ -1,7 +1,7 @@
 <?php
 
 function e404(){
-  require '../404.php';
+  require '404.php';
   exit();
 }
 
@@ -17,9 +17,8 @@ function dd(...$vars){
 
 
 function get_pdo(): PDO{
-  return new PDO('mysql:host=localhost;dbname =projetWEB', 'root', 'P@pisco1', [
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
- ]);
+  return new PDO('mysql:host=localhost;dbname =id12822867_projetweb', 'id12822867_root', 'P@pisco1'
+ );
 }
 
 

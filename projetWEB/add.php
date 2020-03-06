@@ -1,13 +1,11 @@
 <?php 
 
 require 'src/bootstrap.php';
-require 'views/header.php';
-require 'src/App/Validator.php';
 require 'src/Calendar/EventValidator.php';
 require 'src/Calendar/Events.php';
 $pdo = get_pdo();
 $getLoginUtilisateur = $_GET['login'];
-$reqUtilisateur = $pdo->prepare('SELECT * FROM projetWEB.UTILISATEUR WHERE UTILISATEUR.login = ?');
+$reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
 $reqUtilisateur->execute(array($getLoginUtilisateur));
 $utilisateurInfo = $reqUtilisateur->fetch();
 
@@ -34,16 +32,32 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $event['debutEvenement'] = DateTime::createFromFormat('Y-m-d H:i',$data['dateEvenement']. ' '.$data['debutEvenement'])->format('Y-m-d H:i:s');
     $event['finEvenement'] = DateTime::createFromFormat('Y-m-d H:i',$data['dateEvenement']. ' '.$data['finEvenement'])->format('Y-m-d H:i:s');
     $event['idUtilisateur'] = $utilisateurInfo['idUtilisateur'];
-    
     $events = new \Calendar\Events($pdo);
     $events->create($event); 
-    header("Location: /planning.php?success=1&login=".$utilisateurInfo['login']."");
+    header("Location: /planning/success/1/login/".$utilisateurInfo['login']."");
     exit();
   }
   
 }
 
 ?>
+
+<!Doctype html>
+ <html>
+ 
+ <head>
+ <meta charset="UTF-8">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ <link rel="stylesheet" href="/css/calendar.css">
+ </head>
+ 
+ <body> 
+ 
+<nav class="navbar navbar-dark bg-primary mb-3">
+  <a href="/accueil/login/<?= $_GET['login'];?>" class="navbar-brand"> 🏠</a>
+  <a href="/planning.php/login/<?= $_GET['login'];?>" class="navbar-brand"> 🔄 </a>
+  <a href="/deconnexion.php?>" class="navbar-brand"> 📴</a>
+</nav>
 
 
 <div class="container">
@@ -119,33 +133,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
-require '../views/footer.php';
+require 'views/footer.php';
 ?>
