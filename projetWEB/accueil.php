@@ -5,8 +5,8 @@ require 'src/bootstrap.php';
 require 'src/Calendar/Events.php';
 $pdo = get_pdo();
 if(isset($_COOKIE['login']) and isset($_GET['login'])){
-
-  $getLoginUtilisateur = $_COOKIE['login'];
+  
+  $getLoginUtilisateur = $_GET['login'];
   $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($getLoginUtilisateur));
   $utilisateurInfo = $reqUtilisateur->fetch();
@@ -27,7 +27,7 @@ if(isset($_COOKIE['login']) and isset($_GET['login'])){
  <body> 
 
 <nav class="nav " >
-  <p class="text">Bienvenue dans myEDT <?php echo $_COOKIE['login']; ?> </p>
+  <p class="text">Bienvenue dans myEDT <?php echo $_GET['login']; ?> </p>
   <ol >
     <?php echo '<li class="menu-item"><a href="/accueil/login/'.$getLoginUtilisateur.'">Accueil</a></li>'; ?>
     <li class="menu-item">
@@ -48,4 +48,5 @@ if(isset($_COOKIE['login']) and isset($_GET['login'])){
 <?php 
 require 'views/footer.php';
 }
+
 ?>

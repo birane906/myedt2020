@@ -3,13 +3,14 @@ require 'src/bootstrap.php';
 require 'src/Calendar/Events.php';
 $pdo = get_pdo();
 
-if(isset($_GET['login'])){
-  $utilisateurInfo = $_GET['login'];
+if(isset($_COOKIE['login'])){
+  $utilisateurInfo = $_COOKIE['login'];
   $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($utilisateurInfo)); 
   $utilisateur = $reqUtilisateur->fetch();
   if(isset($_POST['nouveauLogin']) and !empty($_POST['nouveauLogin']) and ($_POST['nouveauLogin'] != $utilisateur['login'])){
     $login = h($_POST['nouveauLogin']);
+
     if(strlen($login) <= 3 or strlen($login) > 255) {
       $error ="Votre login doit avoir entre 3 et 255 caractères inclus !";
     } else {
@@ -18,6 +19,7 @@ if(isset($_GET['login'])){
       if($loginExist == 0){
         $insererLogin = $pdo->prepare("UPDATE id12822867_projetweb.UTILISATEUR SET UTILISATEUR.login = ? WHERE UTILISATEUR.idUtilisateur = ?");
         $insererLogin->execute(array($login,$utilisateur['idUtilisateur']));
+        $_COOKIE['login'] = $login;
         header('Location: /profil/login/'.$login);
         exit();
       }else{$error = "Ce login est déjà utilisé !";}

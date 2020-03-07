@@ -1,5 +1,36 @@
-c#Turn rewrite engine on
-Options +FollowSymlinks
+
+# HTID:13000428: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:13000428:
 RewriteEngine on
 
-ReWriteRule ^accueil/login/(.*)$ accueil.php?login=$1 [nc,qsa]
+# map neat URL to internal URL
+RewriteRule ^accueil/login/(.*)$   accueil.php?login=$1 [nc]
+RewriteRule ^profil/login/(.*)$   profil.php?login=$1 [nc]
+RewriteRule ^planning/login/(.*)$   planning.php?login=$1 [nc]
+RewriteRule ^cours/login/(.*)$   cours.php?login=$1 [nc]
+RewriteRule ^pro/login/(.*)$   pro.php?login=$1 [nc]
+RewriteRule ^autre/login/(.*)$   autre.php?login=$1 [nc]
+RewriteRule ^add/login/(.*)$   add.php?login=$1 [nc]
+RewriteRule ^editionLogin/login/(.*)$   editionLogin.php?login=$1 [nc]
+RewriteRule ^editionMdp/login/(.*)$   editionMdp.php?login=$1 [nc]
+RewriteRule ^planning/month/(.*)/year/(.*)/login/(.*)$ planning.php?month=$1&year=$2&login=$3 [nc]
+RewriteRule ^planning/success/(.*)/login/(.*)$  planning.php?success=$1&login=$2[nc]
+RewriteRule ^modificationEvent/id/(.*)/login/(.*)$ modificationEvent.php?id=$1&login=$2
+RewriteRule ^modificationCours/id/(.*)/login/(.*)$ modificationCours.php?id=$1&login=$2
+RewriteRule ^modificationPro/id/(.*)/login/(.*)$ modificationPro.php?id=$1&login=$2
+RewriteRule ^modificationAutre/id/(.*)/login/(.*)$ modificationAutre.php?id=$1&login=$2
+RewriteRule ^suppressionCours/id/(.*)/login/(.*)$ suppressionCours.php?id=$1&login=$2
+RewriteRule ^suppressionPro/id/(.*)/login/(.*)$ suppressionPro.php?id=$1&login=$2
+RewriteRule ^suppressionAutre/id/(.*)/login/(.*)$ suppressionAutre.php?id=$1&login=$2
+RewriteRule ^suppressionEvent/id/(.*)/login/(.*)$ suppressionEvent.php?id=$1&login=$2
+
+#pro.php?login=
+#autre.php?login=
+#add.php?login=
+
+#modificationAutre.php?id='.$data['idAutre'].'&login=
+#suppressionAutre.php?id='.$data['idAutre'].'&login=
+#modificationCours.php?id='.$data['idCours'].'&login=
+#suppressionCours.php?id='.$data['idCours'].'&login=
+#add.php?date=&login=

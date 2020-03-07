@@ -10,8 +10,6 @@ if(isset($_POST['formInscription'])){
   $motDePasse2 = h($_POST['motDePasse2']);
 
  if (!empty($_POST['prenomUtilisateur']) and !empty($_POST['nomUtilisateur']) and !empty($_POST['login']) and !empty($_POST['motDePasse']) and !empty($_POST['motDePasse2']) ){
-  
-
    $loginlength = strlen($login);
    $mdplength = strlen($motDePasse);
     if ($loginlength <= 255 and $loginlength >= 3){
@@ -173,7 +171,7 @@ if(isset($_POST['formInscription'])){
 
                 <br/>
                 Avez vous déjà un compte myEDT ?
-                <a href="connexion.php">Identifiez vous</a>
+                <a href="index.php">Identifiez vous</a>
                 </div>
         
       </form>

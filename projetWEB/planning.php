@@ -11,13 +11,11 @@ $weeks = $month->getWeeks();
 $end = (clone $start)->modify('+' . (6 + 7 * ($weeks - 1) ). 'days');
 
 if(isset($_COOKIE['login']) and isset($_GET['login'])){
-
   $getLoginUtilisateur = $_COOKIE['login'];
   $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($getLoginUtilisateur));
   $utilisateurInfo = $reqUtilisateur->fetch();
-
-$events = $events->getEventsBetweenByDay($start, $end,$utilisateurInfo['idUtilisateur']);
+  $events = $events->getEventsBetweenByDay($start, $end,$utilisateurInfo['idUtilisateur']);
 
   require 'views/header.php';
 
