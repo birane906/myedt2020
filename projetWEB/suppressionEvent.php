@@ -16,5 +16,5 @@ require 'src/Calendar/Events.php';
      $sql = "DELETE FROM id12822867_projetweb.EVENEMENT WHERE id = $id";
      $pdo->exec($sql);
     }
-    header("Location: planning.php?success=0&login=".$_GET['login']."");
+    header("Location: /planning/success/0/login/".$_GET['login']."");
 ?>

@@ -4,7 +4,7 @@
   require 'src/Calendar/Events.php';
   $pdo = get_pdo();
 
-  if(isset($_COOKIE['login'])){
+  if(isset($_COOKIE['login']) and isset($_GET['login'])){
 
     $getLoginUtilisateur = $_COOKIE['login'];
     $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');

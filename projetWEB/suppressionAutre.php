@@ -15,7 +15,8 @@ if(isset($_GET['id'])){
     $pdo =get_pdo();
     $sql = "DELETE FROM id12822867_projetweb.AUTRE WHERE idAutre = $idAutre";
     $pdo->exec($sql);
-    header("Location: autre.php?login=".$_GET['login']."");
+    header("Location: /autre/login/".$_GET['login']."");
+    exit();
 }
 
 

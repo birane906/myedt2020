@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $event['idUtilisateur'] = $utilisateurInfo['idUtilisateur'];
     
     $events->update($event); 
-    header("Location: /planning.php?success=1&login=".$utilisateurInfo['login']."");
+    header("Location: /planning/success/1/login/".$utilisateurInfo['login']."");
     exit();
   }
   
@@ -123,7 +123,7 @@ require 'views/header.php';
   <div class="form-group">
     <button type="submit" class="btn btn-primary">Modifier Evenement</button>
     
-    <a href="/suppressionEvent.php?id=<?= h($event['id'] ); ?>&login=<?= $getLoginUtilisateur; ?>">
+    <a href="/suppressionEvent/id/<?= h($event['id'] ); ?>/login/<?= $getLoginUtilisateur; ?>">
       <button type="button" class="btn btn-primary">Supprimer Evenement</button>
     </a>
   </div>

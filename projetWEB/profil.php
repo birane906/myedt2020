@@ -3,9 +3,9 @@ require 'src/bootstrap.php';
 require 'src/Calendar/Events.php';
 $pdo = get_pdo();
 
-if(isset($_GET['login'])){
+if(isset($_GET['login']) and isset($_COOKIE['login'])){
 
-  $getLoginUtilisateur = $_GET['login'];
+  $getLoginUtilisateur = $_COOKIE['login'];
   $reqUtilisateur = $pdo->prepare('SELECT * FROM id12822867_projetweb.UTILISATEUR WHERE UTILISATEUR.login = ?');
   $reqUtilisateur->execute(array($getLoginUtilisateur));
   $utilisateurInfo = $reqUtilisateur->fetch();
@@ -24,7 +24,7 @@ if(isset($_GET['login'])){
  </head>
  
  <body class="col"> 
- <?php echo '<a href="/accueil/login/'.$_GET['login'].'">🏠</a>';?>
+ <?php echo '<a href="/accueil/login/'.$_COOKIE['login'].'">🏠</a>';?>
  <?php echo '<a href="/deconnexion.php">📴</a>';?><br/>
 
     <div class="container">

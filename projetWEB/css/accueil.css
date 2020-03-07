@@ -203,16 +203,6 @@ nav > ol > .menu-item:nth-of-type(9) > a:before {
 
 
 
-nav > ol > .menu-item:nth-of-type(3) ol li a:before,
-nav > ol > .menu-item:nth-of-type(4) ol li a:before {
-  content: "✏️";
-  display: inline-flex;
-  font-size: inherit;
-  transform: rotateZ(-8deg);
-  margin-right: 5px;
-  transition: transform 300ms ease-out;
-}
-
 nav > ol > li {
   width: 20%;
   margin-right: -4px;

@@ -50,7 +50,7 @@ $events = $events->getEventsBetweenByDay($start, $end,$utilisateurInfo['idUtilis
 
   <div>
     <a href="/planning/month/<?= $month->previousMonth()->month; ?>/year/<?= $month->previousMonth()->year; ?>/login/<?= $getLoginUtilisateur; ?>" class="btn btn-primary">&lt;</a>
-    <a href="/planning/month/<?= $month->nextMonth()->month; ?>/year/<?= $month->nextMonth()->year; ?>/login=<?= $getLoginUtilisateur; ?>" class="btn btn-primary">&gt;</a>
+    <a href="/planning/month/<?= $month->nextMonth()->month; ?>/year/<?= $month->nextMonth()->year; ?>/login/<?= $getLoginUtilisateur; ?>" class="btn btn-primary">&gt;</a>
   </div>
 
 </div>
@@ -72,8 +72,8 @@ $events = $events->getEventsBetweenByDay($start, $end,$utilisateurInfo['idUtilis
          <a class="calendar__day" href="add.php?date=<?= $date->format('Y-m-d'); ?>&login=<?= $getLoginUtilisateur; ?>"> <?= $date->format('d'); ?> </a>
          <?php foreach ($eventsForDay as $event): ?>
           <div class="calendar__event">
-          <?= (new DateTime($event['debutEvenement']))->format('H:i') ?> - <a href="/modificationEvent.php?id=<?= h($event['id'] );
-          ?>&login=<?php echo $getLoginUtilisateur;?>"> <?= h($event['libEvenement']); ?></a>
+          <?= (new DateTime($event['debutEvenement']))->format('H:i') ?> - <a href="/modificationEvent/id/<?= h($event['id'] );
+          ?>/login/<?php echo $getLoginUtilisateur;?>"> <?= h($event['libEvenement']); ?></a>
 
 
           </div>
