@@ -83,7 +83,7 @@ if(isset($_COOKIE['login']) and isset($_GET['login'])){
  
 </table>
 
-<?php echo '<a href="/add/login/'.$utilisateurInfo['login'].'" class="calendar__button">  + </a>' ;?>
+<?php echo '<a href="/add/login/'.$getLoginUtilisateur.'" class="calendar__button">  + </a>' ;?>
 </div>
 
 <?php 

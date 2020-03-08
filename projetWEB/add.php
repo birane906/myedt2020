@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $event['idUtilisateur'] = $utilisateurInfo['idUtilisateur'];
     $events = new \Calendar\Events($pdo);
     $events->create($event); 
-    header("Location: /planning/success/1/login/".$utilisateurInfo['login']."");
+    header("Location: /planning/success/1/login/".$_GET['login']."");
     exit();
   }
   

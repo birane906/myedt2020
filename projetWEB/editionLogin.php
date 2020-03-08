@@ -11,7 +11,7 @@ if(isset($_COOKIE['login'])){
   if(isset($_POST['nouveauLogin']) and !empty($_POST['nouveauLogin']) and ($_POST['nouveauLogin'] != $utilisateur['login'])){
     $login = h($_POST['nouveauLogin']);
 
-    if(strlen($login) <= 3 or strlen($login) > 255) {
+    if(strlen($login) < 3 or strlen($login) > 255) {
       $error ="Votre login doit avoir entre 3 et 255 caractères inclus !";
     } else {
       $reqUtilisateur->execute(array($login));
@@ -52,7 +52,7 @@ if(isset($_COOKIE['login'])){
       <label>Login : </label>
       </td>
       <td>
-      <input type="text" name="nouveauLogin" placeholder="Nouveau Login" value="<?php echo $_COOKIE['login'];?>" /> <br/> <br/>
+      <input type="text" name="nouveauLogin" placeholder="Nouveau Login" value="<?php echo $_GET['login'];?>" /> <br/> <br/>
       </td>
       <td>
       <input type="submit" value= "Enregistrer Modification" /> <br/> <br/>

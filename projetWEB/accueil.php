@@ -1,6 +1,4 @@
 <?php 
-
-session_start();
 require 'src/bootstrap.php';
 require 'src/Calendar/Events.php';
 $pdo = get_pdo();
@@ -38,7 +36,7 @@ if(isset($_COOKIE['login']) and isset($_GET['login'])){
     <?php echo '<li class="menu-item"><a href="/pro/login/'.$utilisateurInfo['login'].'">CV / Lettre</a></li>'; ?>
     <?php echo '<li class="menu-item"><a href="/autre/login/'.$utilisateurInfo['login'].'">Autres</a></li>'; ?>
     <?php echo '<li class="menu-item"><a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCHrlFSnbnbPxqHxJwQXHCQrxWVWkmrnHnwSsWmjTmFFlNPPRhjKvBsLFCDzWMFMjvkzbkXB">Contactez nous</a></li>' ; ?> 
-    <?php echo '<li class="menu-item"><a href="#">A propos</a></li>'; ?>
+    <?php echo '<li class="menu-item"><a href="/apropos/login/'.$utilisateurInfo['login'].'">A propos</a></li>'; ?>
     <?php echo '<li class="menu-item"><a href="/deconnexion.php">Déconnexion</a></li>'; ?>
    
   </ol>
